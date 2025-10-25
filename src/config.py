@@ -67,9 +67,9 @@ class DataGenerationConfig:
         'Philadelphia', 'San Antonio', 'San Diego', 'Dallas', 'Austin'
     ])
     education_distribution: Dict[str, float] = field(default_factory=lambda: {
-        'Bachelors': 0.225,
-        'Masters': 0.45,
-        'PhD': 0.135,
+        'Bachelors': 0.40,
+        'Masters': 0.40,
+        'PhD': 0.10,
         'Other': 0.10
     })
     premium_rate: float = 0.07

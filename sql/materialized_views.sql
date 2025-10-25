@@ -1,4 +1,4 @@
--- Materialized Views for WorkHeart A/B Testing
+-- Materialized Views for A/B Testing
 -- Pre-aggregated metrics for performance optimization
 
 -- ============================================================

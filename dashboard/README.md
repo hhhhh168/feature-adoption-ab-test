@@ -1,4 +1,4 @@
-# WorkHeart A/B Testing Dashboard
+# A/B Testing Dashboard
 
 Interactive Streamlit dashboard for analyzing the two-tier verification experiment.
 

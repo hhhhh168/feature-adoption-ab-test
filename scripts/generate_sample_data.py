@@ -6,7 +6,7 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.synthetic_data_generator import WorkHeartDataGenerator
+from src.synthetic_data_generator import ExperimentDataGenerator
 from src.config import DataGenerationConfig, ExperimentConfig
 
 def main():
@@ -21,7 +21,7 @@ def main():
 
     exp_config = ExperimentConfig()
 
-    generator = WorkHeartDataGenerator(config, exp_config, seed=42)
+    generator = ExperimentDataGenerator(config, exp_config, seed=42)
     data = generator.generate_all_data()
 
     # Save to CSV

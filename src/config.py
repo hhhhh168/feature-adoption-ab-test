@@ -1,5 +1,5 @@
 """
-Configuration management for WorkHeart A/B Testing Platform
+Configuration management for A/B Testing Platform
 """
 import os
 from dataclasses import dataclass, field
@@ -133,7 +133,7 @@ class AnalysisConfig:
 @dataclass
 class DashboardConfig:
     """Dashboard configuration"""
-    title: str = "WorkHeart Verification A/B Test Dashboard"
+    title: str = "Verification A/B Test Dashboard"
     page_icon: str = "💙"
     layout: str = "wide"
     refresh_interval: int = 300  # seconds

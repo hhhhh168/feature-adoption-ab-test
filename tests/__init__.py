@@ -1,3 +1,3 @@
 """
-Test suite for WorkHeart A/B Testing Platform
+Test suite for A/B Testing Platform
 """

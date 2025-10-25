@@ -1,5 +1,5 @@
 """
-WorkHeart A/B Testing Platform
+A/B Testing Platform
 Two-Tier Verification Feature Optimization
 """
 

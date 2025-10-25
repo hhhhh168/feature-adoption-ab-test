@@ -1,5 +1,5 @@
 """
-WorkHeart A/B Testing Dashboard
+A/B Testing Dashboard
 Interactive Streamlit dashboard for experiment analysis
 """
 import streamlit as st
@@ -20,8 +20,8 @@ from src.utils import calculate_conversion_rate, calculate_relative_lift
 
 # Page configuration
 st.set_page_config(
-    page_title="WorkHeart A/B Test Dashboard",
-    page_icon="💙",
+    page_title="A/B Test Dashboard",
+    page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -151,7 +151,7 @@ def create_funnel_chart(funnel_data):
 
 def main():
     # Header
-    st.title("💙 WorkHeart Verification A/B Test Dashboard")
+    st.title("Verification A/B Test Dashboard")
     st.markdown("**Two-Tier Verification Feature Optimization**")
     st.markdown("---")
 
@@ -451,7 +451,7 @@ def main():
 
     # === FOOTER ===
     st.markdown("---")
-    st.markdown("*Dashboard built with Streamlit & Plotly | WorkHeart A/B Testing Platform*")
+    st.markdown("*Dashboard built with Streamlit & Plotly*")
 
 
 if __name__ == "__main__":

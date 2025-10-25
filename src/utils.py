@@ -1,5 +1,5 @@
 """
-Utility functions for WorkHeart A/B Testing Platform
+Utility functions for A/B Testing Platform
 """
 import pandas as pd
 import numpy as np

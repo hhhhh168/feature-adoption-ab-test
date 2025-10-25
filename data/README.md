@@ -1,6 +1,6 @@
 # Data Directory
 
-This directory contains generated data files for the WorkHeart A/B testing platform.
+This directory contains generated data files for the A/B testing platform.
 
 ## Contents
 

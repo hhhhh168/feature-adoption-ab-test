@@ -1,5 +1,5 @@
 """
-Experiment assignment logic for WorkHeart A/B Testing Platform
+Experiment assignment logic for A/B Testing Platform
 Hash-based deterministic randomization for consistent user assignment
 """
 import hashlib

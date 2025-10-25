@@ -1,4 +1,4 @@
--- WorkHeart A/B Testing Database Schema
+-- A/B Testing Database Schema
 -- Two-Tier Verification Feature Experiment
 
 -- ============================================================

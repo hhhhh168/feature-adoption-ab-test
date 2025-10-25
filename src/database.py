@@ -1,5 +1,5 @@
 """
-Database management utilities for WorkHeart A/B Testing Platform
+Database management utilities for A/B Testing Platform
 Handles Supabase PostgreSQL connections and operations
 """
 import pandas as pd

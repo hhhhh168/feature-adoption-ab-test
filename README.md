@@ -1,4 +1,4 @@
-# WorkHeart A/B Testing Platform 💙
+# Feature Adoption A/B Testing Platform
 
 **Two-Tier Verification Feature Optimization**
 
@@ -6,11 +6,11 @@ A production-ready A/B testing platform demonstrating advanced statistical analy
 
 ---
 
-## 🎯 Project Overview
+## Project Overview
 
 ### Business Context
 
-WorkHeart is a professional dating app targeting educated professionals (90%+ have Bachelor's degree or higher). The platform implements a two-tier verification system:
+This project models an experiment for a professional dating application targeting educated professionals. The platform implements a two-tier verification system:
 
 - **Tier 1**: Email domain verification (@company.edu, @company.com)
 - **Tier 2**: Badge/ID verification for additional trust signals
@@ -24,7 +24,7 @@ WorkHeart is a professional dating app targeting educated professionals (90%+ ha
 
 ---
 
-## 📊 Key Features
+## Key Features
 
 ### 1. **Synthetic Data Generation**
 - 50,000 realistic user profiles using SDV (Synthetic Data Vault)
@@ -54,7 +54,7 @@ WorkHeart is a professional dating app targeting educated professionals (90%+ ha
 
 ---
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 feature-adoption-ab-test/
@@ -69,32 +69,30 @@ feature-adoption-ab-test/
 │   └── utils.py                      # Helper functions
 ├── dashboard/
 │   ├── dashboard.py                  # Main Streamlit app
+│   ├── README.md                     # Dashboard documentation
 │   └── components/                   # Dashboard components
 ├── sql/
 │   ├── schema.sql                    # Database schema
-│   ├── materialized_views.sql        # Performance views
-│   └── sample_queries.sql            # Example queries
+│   └── materialized_views.sql        # Performance views
+├── scripts/
+│   └── generate_sample_data.py       # Generate demo data
 ├── tests/
-│   ├── test_assignment.py
 │   ├── test_statistics.py
 │   └── test_cuped.py
-├── notebooks/
-│   ├── 01_data_generation.ipynb
-│   ├── 02_exploratory_analysis.ipynb
-│   └── 03_statistical_analysis.ipynb
 ├── docs/
-│   ├── experiment_design.md
-│   ├── statistical_methodology.md
-│   └── interview_guide.md
+│   └── experiment_design.md          # Complete experiment methodology
+├── .streamlit/
+│   └── config.toml                   # Dashboard theme config
 ├── data/                             # Generated data (gitignored)
 ├── requirements.txt
 ├── .env.example
+├── .gitignore
 └── README.md
 ```
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -135,54 +133,78 @@ python -c "from src.database import *; db = DatabaseManager(); db.execute_sql_fi
 
 ---
 
-## 📈 Usage
+## Usage
 
-### Generate Synthetic Data
+### Quick Start: Dashboard Demo
+
+The fastest way to explore the platform:
+
+```bash
+# 1. Generate sample data (5,000 users)
+python scripts/generate_sample_data.py
+
+# 2. Launch interactive dashboard
+streamlit run dashboard/dashboard.py
+```
+
+The dashboard will open at `http://localhost:8501` with:
+- Executive summary and key metrics
+- Statistical test results with p-values
+- Funnel analysis and visualizations
+- CUPED variance reduction analysis
+- Sample Ratio Mismatch checks
+
+### Generate Synthetic Data (Full Dataset)
 
 ```python
-from src.synthetic_data_generator import WorkHeartDataGenerator
-from src.config import DATA_CONFIG, EXP_CONFIG
+from src.synthetic_data_generator import ExperimentDataGenerator
+from src.config import DataGenerationConfig, ExperimentConfig
 
-generator = WorkHeartDataGenerator(DATA_CONFIG, EXP_CONFIG)
+# Configure dataset
+config = DataGenerationConfig()
+config.n_users = 50000  # Full experiment size
+
+exp_config = ExperimentConfig()
+exp_config.treatment_effect_tier1 = 0.15  # 15% lift
+
+# Generate data
+generator = ExperimentDataGenerator(config, exp_config, seed=42)
 data = generator.generate_all_data()
 
-# Upload to database
-from src.database import DatabaseManager
-db = DatabaseManager()
-db.insert_dataframe('users', data['users'])
-db.insert_dataframe('experiment_assignments', data['assignments'])
-# ... etc
+# Data includes: users, pre_metrics, assignments, events, verification_attempts
 ```
 
 ### Run Statistical Analysis
 
 ```python
 from src.statistical_analysis import ABTestAnalyzer
-from src.database import DatabaseManager
+import pandas as pd
 
-db = DatabaseManager()
-data = db.get_experiment_data('verification_v1')
+# Load experiment data
+assignments = pd.read_csv('data/experiment_assignments.csv')
+verification = pd.read_csv('data/verification_status.csv')
+pre_metrics = pd.read_csv('data/user_pre_metrics.csv')
 
+# Merge data
+data = assignments.merge(verification, on='user_id').merge(pre_metrics, on='user_id')
+
+# Analyze with CUPED
 analyzer = ABTestAnalyzer(alpha=0.05, power=0.80)
-results = analyzer.analyze_experiment(
-    data=data['verification'],
-    metrics=['tier1_completed', 'tier2_completed'],
-    primary_metric='tier1_completed',
-    use_cuped=True
+results = analyzer.proportion_test(
+    n_control=len(data[data['variant']=='control']),
+    successes_control=data[data['variant']=='control']['tier1_verified'].sum(),
+    n_treatment=len(data[data['variant']=='treatment']),
+    successes_treatment=data[data['variant']=='treatment']['tier1_verified'].sum()
 )
 
-print(results['recommendation'])
-```
-
-### Launch Dashboard
-
-```bash
-streamlit run dashboard/dashboard.py
+print(f"Lift: {results['relative_lift']:.2%}")
+print(f"P-value: {results['p_value']:.4f}")
+print(f"95% CI: [{results['ci_lower']:.3f}, {results['ci_upper']:.3f}]")
 ```
 
 ---
 
-## 🧪 Statistical Methodology
+## Statistical Methodology
 
 ### CUPED Variance Reduction
 
@@ -217,27 +239,27 @@ Using Benjamini-Hochberg FDR control to adjust p-values across multiple metrics.
 
 ---
 
-## 📊 Key Results
+## Key Results
 
 ### Synthetic Data Validation
 
-✅ **Sample Ratio Mismatch**: p = 0.87 (no SRM detected)
-✅ **Covariate Balance**: All pre-metrics balanced (p > 0.05)
-✅ **CUPED Variance Reduction**: 42% for sessions metric
+**Sample Ratio Mismatch**: p = 0.87 (no SRM detected)
+**Covariate Balance**: All pre-metrics balanced (p > 0.05)
+**CUPED Variance Reduction**: 42% for sessions metric
 
 ### Experiment Results (Synthetic Ground Truth)
 
 | Metric | Control | Treatment | Lift | p-value | Significant |
 |--------|---------|-----------|------|---------|-------------|
-| Tier 1 Completion | 40.0% | 46.0% | +15.0% | <0.001 | ✅ |
-| Tier 2 Completion | 25.0% | 30.0% | +20.0% | <0.001 | ✅ |
-| Sessions/User | 14.2 | 15.9 | +12.0% | <0.001 | ✅ |
+| Tier 1 Completion | 40.0% | 46.0% | +15.0% | <0.001 | Yes |
+| Tier 2 Completion | 25.0% | 30.0% | +20.0% | <0.001 | Yes |
+| Sessions/User | 14.2 | 15.9 | +12.0% | <0.001 | Yes |
 
-**Recommendation**: 🚀 **SHIP** - Statistically significant positive impact on all key metrics
+**Recommendation**: SHIP - Statistically significant positive impact on all key metrics
 
 ---
 
-## 🎓 Portfolio Highlights
+## Portfolio Highlights
 
 ### Technical Skills Demonstrated
 
@@ -257,7 +279,7 @@ Using Benjamini-Hochberg FDR control to adjust p-values across multiple metrics.
 
 ---
 
-## 🧪 Testing
+## Testing
 
 Run the test suite:
 
@@ -267,15 +289,14 @@ pytest tests/ -v --cov=src
 
 ---
 
-## 📚 Documentation
+## Documentation
 
-- **[Experiment Design](docs/experiment_design.md)** - Detailed experiment methodology
-- **[Statistical Methodology](docs/statistical_methodology.md)** - Deep dive into statistical methods
-- **[Interview Guide](docs/interview_guide.md)** - How to discuss this project in interviews
+- **[Experiment Design](docs/experiment_design.md)** - Comprehensive experiment methodology covering hypothesis development, power analysis, metrics framework, statistical analysis plan, data quality checks, and decision criteria
+- **[Dashboard Guide](dashboard/README.md)** - Interactive dashboard setup and usage instructions
 
 ---
 
-## ⚠️ Important Notes
+## Important Notes
 
 ### Synthetic Data Disclaimer
 
@@ -287,7 +308,7 @@ This project requires a PostgreSQL database. Free tier Supabase accounts work pe
 
 ---
 
-## 🔮 Future Enhancements
+## Future Enhancements
 
 - [ ] Bayesian A/B testing implementation
 - [ ] Sequential testing with alpha spending
@@ -297,36 +318,16 @@ This project requires a PostgreSQL database. Free tier Supabase accounts work pe
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 This is a portfolio project, but feedback and suggestions are welcome! Please open an issue to discuss.
 
 ---
 
-## 📄 License
+## License
 
 MIT License - See LICENSE file for details
 
 ---
 
-## 👤 Author
-
-**Your Name**
-- Portfolio: [your-portfolio.com]
-- LinkedIn: [linkedin.com/in/yourprofile]
-- GitHub: [@hhhhh168](https://github.com/hhhhh168)
-
----
-
-## 🙏 Acknowledgments
-
-- **SDV Team** - Synthetic data generation library
-- **Supabase** - Database hosting
-- **Streamlit** - Dashboard framework
-- Microsoft Research - CUPED methodology
-
----
-
-**Built for Data Science roles at Apple, Amazon, TikTok (3-5 YOE level)**
-
-*Demonstrating production-ready A/B testing skills with statistical rigor and engineering best practices.*
+GitHub: [@hhhhh168](https://github.com/hhhhh168)

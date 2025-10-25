@@ -1,5 +1,5 @@
 """
-Statistical Analysis Engine for WorkHeart A/B Testing Platform
+Statistical Analysis Engine for A/B Testing Platform
 Comprehensive statistical methods for experiment analysis
 """
 import numpy as np

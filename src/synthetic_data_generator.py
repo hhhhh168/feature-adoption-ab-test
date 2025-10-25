@@ -1,5 +1,5 @@
 """
-Synthetic Data Generator for WorkHeart A/B Testing Platform
+Synthetic Data Generator for A/B Testing Platform
 Generates realistic user data with ground truth treatment effects
 """
 import pandas as pd
@@ -18,8 +18,8 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-class WorkHeartDataGenerator:
-    """Generate realistic synthetic data for WorkHeart dating app"""
+class ExperimentDataGenerator:
+    """Generate realistic synthetic data for dating app experiment"""
 
     def __init__(self,
                  data_config: DataGenerationConfig,
@@ -39,7 +39,7 @@ class WorkHeartDataGenerator:
         self.rng = np.random.default_rng(seed)
         self.assigner = ExperimentAssignment()
 
-        logger.info(f"Initialized WorkHeartDataGenerator with seed={seed}")
+        logger.info(f"Initialized ExperimentDataGenerator with seed={seed}")
 
     def generate_users(self) -> pd.DataFrame:
         """
@@ -635,7 +635,7 @@ if __name__ == "__main__":
     # Generate synthetic data
     from src.config import DATA_CONFIG, EXP_CONFIG
 
-    generator = WorkHeartDataGenerator(DATA_CONFIG, EXP_CONFIG)
+    generator = ExperimentDataGenerator(DATA_CONFIG, EXP_CONFIG)
     data = generator.generate_all_data()
 
     # Save to CSV files

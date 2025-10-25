@@ -1,3 +1,3 @@
 """
-Dashboard components for WorkHeart A/B Testing Platform
+Dashboard components for A/B Testing Platform
 """

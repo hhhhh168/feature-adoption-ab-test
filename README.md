@@ -4,6 +4,8 @@
 
 A production-ready A/B testing platform demonstrating advanced statistical analysis, synthetic data generation, and interactive visualization for a dating app verification feature experiment.
 
+**Built with modern 2025 tooling**: UV (fast package manager), Just (command runner), Commitizen (conventional commits), and Ruff (linter/formatter).
+
 ---
 
 ## Project Overview
@@ -52,6 +54,12 @@ This project models an experiment for a professional dating application targetin
 - Funnel analysis
 - Statistical details and quality checks
 
+### 5. **Modern Development Tooling (2025)**
+- **UV**: Lightning-fast Python package manager (10-100x faster than pip)
+- **Just**: Command runner for simplified workflows (`just --list` to see all commands)
+- **Commitizen**: Automated conventional commits and semantic versioning
+- **Ruff**: Fast linter and formatter (replaces Black, Flake8, isort)
+
 ---
 
 ## Project Structure
@@ -80,10 +88,14 @@ feature-adoption-ab-test/
 │   ├── test_statistics.py
 │   └── test_cuped.py
 ├── docs/
-│   └── experiment_design.md          # Complete experiment methodology
+│   ├── experiment_design.md          # Complete experiment methodology
+│   └── modern_tooling.md             # Modern development tools guide
 ├── .streamlit/
 │   └── config.toml                   # Dashboard theme config
 ├── data/                             # Generated data (gitignored)
+├── justfile                          # Command runner recipes
+├── .cz.toml                          # Commitizen configuration
+├── ruff.toml                         # Ruff linter/formatter config
 ├── requirements.txt
 ├── .env.example
 ├── .gitignore
@@ -100,7 +112,40 @@ feature-adoption-ab-test/
 - PostgreSQL database (Supabase account recommended)
 - Git
 
-### Installation
+### Quick Start (Modern Approach - Recommended)
+
+Using modern tooling for 100x faster setup:
+
+1. **Install modern tools**
+```bash
+# Install UV (fast package manager)
+curl -LsSf https://astral.sh/uv/install.sh | sh  # macOS/Linux
+# Or: brew install uv
+
+# Install Just (command runner)
+brew install just  # macOS
+# Or: cargo install just
+```
+
+2. **Clone and setup**
+```bash
+git clone https://github.com/hhhhh168/feature-adoption-ab-test.git
+cd feature-adoption-ab-test
+
+# Complete setup in one command
+just setup
+```
+
+3. **Run dashboard**
+```bash
+just dashboard
+```
+
+**That's it!** See all available commands with `just --list`.
+
+### Traditional Installation (Alternative)
+
+If you prefer traditional tools:
 
 1. **Clone the repository**
 ```bash
@@ -137,8 +182,12 @@ python -c "from src.database import *; db = DatabaseManager(); db.execute_sql_fi
 
 ### Quick Start: Dashboard Demo
 
-The fastest way to explore the platform:
+**Modern approach (using Just)**:
+```bash
+just demo  # Generates data and launches dashboard in one command
+```
 
+**Traditional approach**:
 ```bash
 # 1. Generate sample data (5,000 users)
 python scripts/generate_sample_data.py
@@ -147,12 +196,26 @@ python scripts/generate_sample_data.py
 streamlit run dashboard/dashboard.py
 ```
 
-The dashboard will open at `http://localhost:8501` with:
+The dashboard opens at `http://localhost:8501` with:
 - Executive summary and key metrics
 - Statistical test results with p-values
 - Funnel analysis and visualizations
 - CUPED variance reduction analysis
 - Sample Ratio Mismatch checks
+
+### Common Commands
+
+| Task | Modern (Just) | Traditional |
+|------|---------------|-------------|
+| Install dependencies | `just install` | `pip install -r requirements.txt` |
+| Generate data | `just generate-data` | `python scripts/generate_sample_data.py` |
+| Run tests | `just test` | `pytest tests/ -v --cov=src` |
+| Format code | `just format` | `ruff format src/` |
+| Lint code | `just lint` | `ruff check src/` |
+| Launch dashboard | `just dashboard` | `streamlit run dashboard/dashboard.py` |
+| All CI checks | `just ci` | `pytest && ruff check` |
+
+Run `just --list` to see all available commands.
 
 ### Generate Synthetic Data (Full Dataset)
 
@@ -268,14 +331,20 @@ Using Benjamini-Hochberg FDR control to adjust p-values across multiple metrics.
 - **Python Engineering**: OOP design, type hints, comprehensive documentation
 - **Data Visualization**: Plotly interactive charts, Streamlit dashboards
 - **Synthetic Data**: SDV for realistic data generation
-- **Best Practices**: Git workflow, virtual environments, configuration management
+- **Modern Tooling**: UV (10-100x faster than pip), Just, Commitizen, Ruff
+- **Best Practices**: Conventional commits, semantic versioning, automated workflows
 
 ### Interview Talking Points
 
-1. **Variance Reduction**: "I implemented CUPED to achieve 40%+ variance reduction..."
-2. **Data Quality**: "Built comprehensive validation including SRM checks and covariate balance..."
-3. **Production-Ready**: "Designed with materialized views for <3s dashboard load times..."
-4. **Statistical Rigor**: "Applied Benjamini-Hochberg correction to control false discovery rate..."
+1. **Variance Reduction**: "I implemented CUPED to achieve 40%+ variance reduction, which is the standard at companies like Microsoft and Google for improving experiment sensitivity."
+
+2. **Data Quality**: "Built comprehensive validation including SRM checks and covariate balance tests - SRM detection alone catches ~6% of experiments with critical bugs according to Microsoft Research."
+
+3. **Modern Tooling**: "I use UV for package management which is 100x faster than pip, and Just for command workflows. This shows I stay current with 2025 Python ecosystem best practices."
+
+4. **Production-Ready**: "Designed with materialized views for sub-3-second dashboard load times and conventional commits for automated versioning - the same practices used at companies like Google and Airbnb."
+
+5. **Statistical Rigor**: "Applied Benjamini-Hochberg FDR correction to control false discovery rate across multiple metrics, following academic standards from the Benjamini-Hochberg 1995 paper."
 
 ---
 
@@ -292,6 +361,7 @@ pytest tests/ -v --cov=src
 ## Documentation
 
 - **[Experiment Design](docs/experiment_design.md)** - Comprehensive experiment methodology covering hypothesis development, power analysis, metrics framework, statistical analysis plan, data quality checks, and decision criteria
+- **[Modern Tooling Guide](docs/modern_tooling.md)** - Complete guide to UV, Just, Commitizen, and Ruff with usage examples and interview talking points
 - **[Dashboard Guide](dashboard/README.md)** - Interactive dashboard setup and usage instructions
 
 ---

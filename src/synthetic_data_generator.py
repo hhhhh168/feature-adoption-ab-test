@@ -301,7 +301,7 @@ class WorkHeartDataGenerator:
                         'user_id': user['user_id'],
                         'event_type': 'profile_view',
                         'event_timestamp': session_time + timedelta(
-                            seconds=int(self.rng.integers(10, duration_seconds))
+                            seconds=int(self.rng.integers(10, max(11, duration_seconds)))
                         ),
                         'session_id': session_id,
                         'event_properties': {},
@@ -315,7 +315,7 @@ class WorkHeartDataGenerator:
                         'user_id': user['user_id'],
                         'event_type': 'match',
                         'event_timestamp': session_time + timedelta(
-                            seconds=int(self.rng.integers(10, duration_seconds))
+                            seconds=int(self.rng.integers(10, max(11, duration_seconds)))
                         ),
                         'session_id': session_id,
                         'event_properties': {},
@@ -331,7 +331,7 @@ class WorkHeartDataGenerator:
                             'user_id': user['user_id'],
                             'event_type': 'message_sent',
                             'event_timestamp': session_time + timedelta(
-                                seconds=int(self.rng.integers(10, duration_seconds))
+                                seconds=int(self.rng.integers(10, max(11, duration_seconds)))
                             ),
                             'session_id': session_id,
                             'event_properties': {},

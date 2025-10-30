@@ -10,7 +10,7 @@ STATUS: READY FOR PORTFOLIO PRESENTATION
 │  EXECUTIVE SUMMARY                                                   │
 └─────────────────────────────────────────────────────────────────────┘
 
-Your A/B testing portfolio project has been audited using practical red flags
+This A/B testing portfolio project has been audited using practical red flags
 that hiring managers check in the first 90 seconds of portfolio review.
 
 RESULT: ✅ PASS - All critical issues fixed

@@ -8,7 +8,7 @@
 
 ## 🎯 Executive Summary
 
-Your A/B testing portfolio project has been **successfully audited and fixed**. It now passes all critical credibility checks that hiring managers look for in the first 90 seconds of portfolio review.
+This A/B testing portfolio project has been **successfully audited and fixed**. It now passes all critical credibility checks that hiring managers look for in the first 90 seconds of portfolio review.
 
 ### Before Fixes
 - 🚨 **1 FAIL**: Baseline conversion rate too high (29.6%)
@@ -114,7 +114,7 @@ Daily conversion std dev: 12.08%
 
 ## 📁 Generated Files
 
-Your audit created these files:
+The audit created these files:
 
 1. **`VALIDATION_REPORT.md`** - Full technical audit report (read this for details)
 2. **`validation_plots.png`** - Visual quality checks

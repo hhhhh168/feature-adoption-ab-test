@@ -405,7 +405,7 @@ while remaining accessible for portfolio review. The statistical techniques
 
 ## Part 5: Fix Script
 
-I've created `fix_synthetic_data.py` which:
+The `fix_synthetic_data.py` script:
 
 1. ✓ Adjusts baseline conversion rates to realistic levels (5-8%)
 2. ✓ Adds device type conversion differences (iOS 1.3x Android)

@@ -80,10 +80,10 @@ class DataGenerationConfig:
     retention_d30: float = 0.03
 
     # Verification baseline rates
-    tier1_start_rate: float = 0.75
-    tier1_completion_rate: float = 0.40
+    tier1_start_rate: float = 0.85  # 85% of users attempt verification
+    tier1_completion_rate: float = 0.06  # 6% - realistic for verification flows
     tier2_start_rate: float = 0.80
-    tier2_completion_rate: float = 0.25
+    tier2_completion_rate: float = 0.15  # 15% of those who completed tier1
 
     # Treatment effects (ground truth for synthetic data)
     tier1_lift: float = 0.15  # 15% relative improvement

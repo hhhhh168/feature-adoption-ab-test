@@ -373,7 +373,10 @@ class ExperimentDataGenerator:
             # Tier 1: Email verification
             if self.rng.random() < self.config.tier1_start_rate:
                 # Apply treatment effect
-                completion_rate = self.config.tier1_completion_rate
+                # Device type affects conversion (iOS converts 1.3x Android)
+                device_multiplier = 1.3 if user.get("device_type") == "iOS" else 1.0
+                
+                completion_rate = self.config.tier1_completion_rate * device_multiplier
                 if user['variant'] == 'treatment':
                     completion_rate *= (1 + self.config.tier1_lift)
 

@@ -29,7 +29,7 @@ This project models an experiment for a professional dating application targetin
 ## Key Features
 
 ### 1. **Synthetic Data Generation**
-- 50,000 realistic user profiles using SDV (Synthetic Data Vault)
+- 50,000 realistic user profiles using scipy/numpy statistical distributions
 - Realistic demographic distributions and behavioral patterns
 - Ground truth treatment effects for validation
 - Complete data quality validation pipeline
@@ -370,7 +370,26 @@ pytest tests/ -v --cov=src
 
 ### Synthetic Data Disclaimer
 
-**This project uses 100% synthetic data generated with the SDV library.** No real user data is included. The synthetic data is designed to demonstrate technical capabilities and statistical methodology.
+**This project uses 100% synthetic data generated using scipy statistical distributions.** No real user data is included. The synthetic data is designed to demonstrate technical capabilities and statistical methodology.
+### Known Limitations
+
+For demonstration purposes, this synthetic dataset includes simplifications:
+
+- **Baseline rates**: Calibrated to 6% for verification flows (realistic for email verification)
+- **Sample size**: Demo uses 5,000 users; full implementation designed for 50K+
+- **Duration**: 2-week experiment for demonstration; production tests often run 4+ weeks
+- **User segments**: Simplified engagement tiers; real apps track dozens of behavioral cohorts
+- **Verification flow**: Two-tier system is simplified from real multi-step flows
+
+These simplifications allow the project to demonstrate statistical methodology
+while remaining accessible for portfolio review. The statistical techniques
+(CUPED, power analysis, SRM checks, multiple testing corrections) scale directly
+to production systems with larger sample sizes and longer durations.
+
+**Statistical validity**: All techniques used (variance reduction, power analysis,
+multiple testing corrections) follow industry best practices from companies like
+Microsoft, Netflix, and Google.
+
 
 ### Database Setup
 

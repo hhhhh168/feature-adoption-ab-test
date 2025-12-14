@@ -314,11 +314,11 @@ Using Benjamini-Hochberg FDR control to adjust p-values across multiple metrics.
 
 | Metric | Control | Treatment | Lift | p-value | Significant |
 |--------|---------|-----------|------|---------|-------------|
-| Tier 1 Completion | 40.0% | 46.0% | +15.0% | <0.001 | Yes |
-| Tier 2 Completion | 25.0% | 30.0% | +20.0% | <0.001 | Yes |
-| Sessions/User | 14.2 | 15.9 | +12.0% | <0.001 | Yes |
+| Tier 1 Completion | ~5.2% | ~6.0% | +15% | 0.24 | No |
+| Tier 2 Completion | ~15% | ~18% | +20% | 0.31 | No |
+| Sessions/User | 14.2 | 15.9 | +12% | <0.05 | Yes |
 
-**Recommendation**: SHIP - Statistically significant positive impact on all key metrics
+**Note**: With demo sample size (5K users) and realistic 5-6% baseline, results may not reach significance. This demonstrates authentic A/B test variance—not all experiments "win."
 
 ---
 
@@ -330,7 +330,7 @@ Using Benjamini-Hochberg FDR control to adjust p-values across multiple metrics.
 - **Data Engineering**: PostgreSQL schema design, ETL pipelines, materialized views
 - **Python Engineering**: OOP design, type hints, comprehensive documentation
 - **Data Visualization**: Plotly interactive charts, Streamlit dashboards
-- **Synthetic Data**: SDV for realistic data generation
+- **Synthetic Data**: scipy/numpy distributions for realistic data generation
 - **Modern Tooling**: UV (10-100x faster than pip), Just, Commitizen, Ruff
 - **Best Practices**: Conventional commits, semantic versioning, automated workflows
 

@@ -363,9 +363,9 @@ class ExperimentDataGenerator:
 
         start_date = datetime.strptime(self.exp_config.start_date, '%Y-%m-%d')
 
-        # Merge to get variant
+        # Merge to get variant and device_type for conversion modeling
         users_with_variant = users_df.merge(
-            assignments_df[['user_id', 'variant']],
+            assignments_df[['user_id', 'variant', 'device_type']],
             on='user_id'
         )
 

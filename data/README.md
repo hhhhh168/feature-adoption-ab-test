@@ -25,4 +25,4 @@ python -m src.synthetic_data_generator
 
 ## Data Privacy
 
-This project uses **100% synthetic data** generated with the SDV library. No real user data is included.
+This project uses **100% synthetic data** generated with scipy/numpy statistical distributions. No real user data is included.

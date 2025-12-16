@@ -309,7 +309,7 @@ Using Benjamini-Hochberg FDR control to adjust p-values across multiple metrics.
 
 ### Synthetic Data Validation
 
-**Sample Ratio Mismatch**: p = 0.87 (no SRM detected)
+**Sample Ratio Mismatch**: p = 0.322 (no SRM detected)
 **Covariate Balance**: All pre-metrics balanced (p > 0.05)
 **CUPED Variance Reduction**: 42% for sessions metric
 

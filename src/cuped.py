@@ -156,6 +156,9 @@ class CUPED:
 
         Uses linear regression to find optimal weights for multiple covariates
 
+        # TODO: Add ridge regression option for correlated covariates
+        # TODO: Investigate whether stratified CUPED improves on this
+
         Args:
             df: DataFrame with experiment data
             post_col: Column name for post-experiment metric

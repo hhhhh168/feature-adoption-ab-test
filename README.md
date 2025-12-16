@@ -74,7 +74,10 @@ feature-adoption-ab-test/
 │   ├── experiment_assignment.py      # Randomization logic
 │   ├── statistical_analysis.py       # Statistical tests
 │   ├── cuped.py                      # CUPED implementation
+│   ├── bayesian_analysis.py          # Bayesian A/B testing (WIP)
 │   └── utils.py                      # Helper functions
+├── notebooks/
+│   └── exploration.ipynb             # Exploratory analysis
 ├── dashboard/
 │   ├── dashboard.py                  # Main Streamlit app
 │   ├── README.md                     # Dashboard documentation
@@ -291,10 +294,10 @@ Required sample size per variant:
 n = (2 * p(1-p) * (z_α/2 + z_β)²) / (p₁ - p₀)²
 ```
 
-For baseline conversion rate of 40% and MDE of 15%:
-- **Required**: ~2,400 per variant
-- **Actual**: 25,000 per variant
-- **Achieved Power**: >99%
+For baseline conversion rate of 6% and MDE of 15% relative:
+- **Required**: ~11,700 per variant (for 80% power)
+- **Demo size**: 2,500 per variant (intentionally smaller for demonstration)
+- **Note**: Demo is underpowered to show realistic variance—explains why p=0.24
 
 ### Multiple Testing Correction
 
@@ -336,15 +339,15 @@ Using Benjamini-Hochberg FDR control to adjust p-values across multiple metrics.
 
 ### Interview Talking Points
 
-1. **Variance Reduction**: "I implemented CUPED to achieve 40%+ variance reduction, which is the standard at companies like Microsoft and Google for improving experiment sensitivity."
+1. **Variance Reduction**: "I implemented CUPED for variance reduction—it's a technique commonly used at companies like Microsoft and Netflix to improve experiment sensitivity without needing larger samples."
 
-2. **Data Quality**: "Built comprehensive validation including SRM checks and covariate balance tests - SRM detection alone catches ~6% of experiments with critical bugs according to Microsoft Research."
+2. **Data Quality**: "Built validation checks including SRM detection and covariate balance tests. SRM checks help catch data pipeline bugs early—Microsoft found these issues in about 6% of their experiments."
 
-3. **Modern Tooling**: "I use UV for package management which is 100x faster than pip, and Just for command workflows. This shows I stay current with 2025 Python ecosystem best practices."
+3. **Modern Tooling**: "I use UV for package management and Just for workflow automation. These are newer tools in the Python ecosystem that improve developer experience."
 
-4. **Production-Ready**: "Designed with materialized views for sub-3-second dashboard load times and conventional commits for automated versioning - the same practices used at companies like Google and Airbnb."
+4. **Production Considerations**: "Designed with materialized views for dashboard performance and conventional commits for versioning—practices I've seen work well in production environments."
 
-5. **Statistical Rigor**: "Applied Benjamini-Hochberg FDR correction to control false discovery rate across multiple metrics, following academic standards from the Benjamini-Hochberg 1995 paper."
+5. **Statistical Rigor**: "Applied Benjamini-Hochberg correction to control false discovery rate when testing multiple metrics. It's a standard approach when you're looking at more than one outcome."
 
 ---
 
@@ -399,8 +402,8 @@ This project requires a PostgreSQL database. Free tier Supabase accounts work pe
 
 ## Future Enhancements
 
-- [ ] Bayesian A/B testing implementation
-- [ ] Sequential testing with alpha spending
+- [x] Bayesian A/B testing (basic implementation in `src/bayesian_analysis.py`)
+- [ ] Sequential testing with alpha spending (O'Brien-Fleming boundaries started)
 - [ ] Multi-armed bandit optimization
 - [ ] Automated experiment monitoring alerts
 - [ ] API endpoints for programmatic access

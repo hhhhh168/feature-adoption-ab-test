@@ -483,10 +483,15 @@ class ExperimentDataGenerator:
         """Sample hour of day with peak usage 6-10pm"""
         # Peak hours (18-22): 40% of traffic
         # Other hours: 60% of traffic
+        # NOTE: Could make this more realistic with a proper mixture distribution
+        # but this is good enough for demo purposes
         if self.rng.random() < 0.4:
             return self.rng.integers(18, 23)
         else:
             return self.rng.integers(0, 18)
+
+    # Tried using scipy.stats.vonmises for circular distribution but
+    # it was overkill for this use case. Keeping simple for now.
 
     def validate_data_quality(self,
                              users_df: pd.DataFrame,

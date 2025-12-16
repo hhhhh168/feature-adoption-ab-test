@@ -422,6 +422,8 @@ class ABTestAnalyzer:
         }
 
     # ============= SEQUENTIAL TESTING =============
+    # TODO: Consider implementing ALWAYS VALID inference as alternative to alpha spending
+    # See: https://arxiv.org/abs/1906.07801
 
     def sequential_p_value_with_spending(self,
                                         current_p: float,

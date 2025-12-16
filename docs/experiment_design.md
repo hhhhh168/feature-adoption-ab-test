@@ -17,8 +17,8 @@ This experiment evaluates whether a streamlined two-tier verification flow incre
 ### The Problem
 
 A dating application serving educated professionals faces low verification adoption:
-- **Current Tier 1 (Email) completion**: 40%
-- **Current Tier 2 (Badge/ID) completion**: 25%
+- **Current Tier 1 (Email) completion**: 6%
+- **Current Tier 2 (Badge/ID) completion**: 15% (of Tier 1 completers)
 
 Low verification rates reduce trust signals on profiles, potentially impacting:
 - Match quality and relevance
@@ -135,8 +135,8 @@ variant = 'control' if hash_value % 2 == 0 else 'treatment'
 
 | Parameter | Value | Justification |
 |-----------|-------|---------------|
-| Baseline rate (p₀) | 40% | Historical Tier 1 completion |
-| Treatment rate (p₁) | 46% | 15% relative lift |
+| Baseline rate (p₀) | 6% | Historical Tier 1 completion |
+| Treatment rate (p₁) | 6.9% | 15% relative lift |
 | Minimum Detectable Effect | 15% relative | Smallest meaningful business impact |
 | Significance level (α) | 0.05 | Industry standard (two-tailed) |
 | Statistical power (1-β) | 80% | Industry standard |
@@ -149,20 +149,21 @@ n = 2 * p̄(1-p̄) * (z_{α/2} + z_β)² / (p₁ - p₀)²
 ```
 
 **Calculation**:
-- p̄ = (0.40 + 0.46) / 2 = 0.43
+- p̄ = (0.06 + 0.069) / 2 = 0.0645
 - z_{α/2} = 1.96 (for α=0.05, two-tailed)
 - z_β = 0.84 (for power=0.80)
-- Effect size = 0.46 - 0.40 = 0.06
+- Effect size = 0.069 - 0.06 = 0.009
 
 ```
-n = 2 * 0.43 * 0.57 * (1.96 + 0.84)² / (0.06)²
-n = 2 * 0.2451 * 7.84 / 0.0036
-n = 1,067 per variant
+n = 2 * 0.0645 * 0.9355 * (1.96 + 0.84)² / (0.009)²
+n = 2 * 0.0603 * 7.84 / 0.000081
+n ≈ 11,700 per variant
 ```
 
-**Required**: 1,067 users per variant (2,134 total)
+**Required**: ~11,700 users per variant (23,400 total)
 **Planned**: 25,000 users per variant (50,000 total)
-**Achieved power**: >99%
+**Demo**: 2,500 per variant (5,000 total) - underpowered for demonstration
+**Note**: Demo sample size intentionally smaller; explains why p=0.24 (not significant)
 
 **Decision Rationale**: Over-powering the experiment enables:
 - Detection of smaller effects (practical significance)
@@ -488,13 +489,13 @@ trackEvent('verification_started', {
 ### 11.1 Success Scenario (Base Case)
 
 **Results**:
-- Primary metric: +15% lift (40% → 46%), p < 0.001
+- Primary metric: +15% lift (6% → 6.9%), p < 0.05
 - Secondary metrics: Tier 2 +20%, engagement +10%
 - Guardrails: No degradation
 
 **Business Impact**:
-- **Annual incremental verified users**: ~7,500
-- **Estimated revenue impact**: $150K+ (verified user premium LTV)
+- **Annual incremental verified users**: ~3,000 (at scale)
+- **Estimated revenue impact**: $60K+ (verified user premium LTV)
 - **Match quality improvement**: 8-12% (historical correlation)
 - **User satisfaction**: +5 NPS points (estimated)
 
